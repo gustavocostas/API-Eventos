@@ -1,7 +1,10 @@
 package br.com.db.ingressos.config.docs;
 
 import br.com.db.ingressos.controller.dto.UsuarioDto;
-import br.com.db.ingressos.model.Usuario;
+import br.com.db.ingressos.exception.EntityBadRequestException;
+import br.com.db.ingressos.exception.EntityNullPointerException;
+import br.com.db.ingressos.resposta.UsuarioAtualizadoResposta;
+import br.com.db.ingressos.resposta.UsuarioResposta;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -17,7 +20,6 @@ import org.springframework.web.client.HttpClientErrorException;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @Tag(name = "usuario", description = "Responsável por manter usuário no sistema")
 public interface UsuarioDocs {
@@ -25,42 +27,42 @@ public interface UsuarioDocs {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201",
                     description = "Usuário incluído com sucesso",
-                    content = @Content(schema = @Schema(implementation = Usuario.class))
+                    content = @Content(schema = @Schema(implementation = UsuarioResposta.class))
             ),
             @ApiResponse(responseCode = "400",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = HttpClientErrorException.BadRequest.class))
+                            schema = @Schema(implementation = EntityBadRequestException.class))
             ),
             @ApiResponse(responseCode = "500",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = NullPointerException.class))
+                            schema = @Schema(implementation = EntityNullPointerException.class))
             ),
 
     })
-    ResponseEntity<UsuarioDto> cadastrarUsuario(@RequestBody @Valid UsuarioDto usuarioDTO);
+    ResponseEntity<UsuarioResposta> cadastrarUsuario(@RequestBody @Valid UsuarioDto usuarioDTO);
 
     @Operation(summary = "Lista os usuários.", tags = "usuario")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Usuários listados com sucesso",
-                    content = @Content(schema = @Schema(implementation = Usuario.class))
+                    content = @Content(schema = @Schema(implementation = UsuarioResposta.class))
             ),
             @ApiResponse(responseCode = "404",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = EntityNotFoundException.class))
+                            schema = @Schema(implementation = br.com.db.ingressos.exception.EntityNotFoundException.class))
             ),
 
     })
-    ResponseEntity<List<UsuarioDto>> listarUsuario();
+    ResponseEntity<List<UsuarioResposta>> listarUsuario();
 
     @Operation(summary = "Encontra o usuário.", tags = "usuario")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Usuário encontrado com sucesso",
-                    content = @Content(schema = @Schema(implementation = Usuario.class))
+                    content = @Content(schema = @Schema(implementation = UsuarioResposta.class))
             ),
             @ApiResponse(responseCode = "404",
                     content = @Content(
@@ -69,18 +71,18 @@ public interface UsuarioDocs {
             ),
 
     })
-    ResponseEntity<Optional<UsuarioDto>> encontrarUsuario(@PathVariable Long id);
+    ResponseEntity<UsuarioResposta> encontrarUsuarioPorId(@PathVariable Long id);
 
     @Operation(summary = "Atualiza o usuário.", tags = "usuario")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Usuário atualizado com sucesso",
-                    content = @Content(schema = @Schema(implementation = Usuario.class))
+                    content = @Content(schema = @Schema(implementation = UsuarioAtualizadoResposta.class))
             ),
             @ApiResponse(responseCode = "400",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = HttpClientErrorException.BadRequest.class))
+                            schema = @Schema(implementation = EntityBadRequestException.class))
             ),
             @ApiResponse(responseCode = "404",
                     content = @Content(
@@ -89,13 +91,13 @@ public interface UsuarioDocs {
             ),
 
     })
-    ResponseEntity<UsuarioDto> atualizarUsuario(@RequestBody @Valid UsuarioDto usuarioDTO);
+    ResponseEntity<UsuarioAtualizadoResposta> atualizarUsuario(@RequestBody @Valid UsuarioAtualizadoResposta usuarioAtualizadoResposta);
 
     @Operation(summary = "Exclui o usuário.", tags = "usuario")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Usuário excluído com sucesso",
-                    content = @Content(schema = @Schema(implementation = Usuario.class))
+                    content = @Content(schema = @Schema(implementation = UsuarioResposta.class))
             ),
             @ApiResponse(responseCode = "404",
                     content = @Content(

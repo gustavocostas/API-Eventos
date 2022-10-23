@@ -10,12 +10,9 @@ public class Evento {
     private Long id;
     @Column(nullable = false, length = 50)
     private String nome;
-    private Double preco;
     @Column(nullable = false, length = 30)
     private String endereco;
     private LocalDateTime localDateTime = LocalDateTime.now();
-    @Enumerated(EnumType.STRING)
-    private CategoriaEvento categoria = CategoriaEvento.PISTA;
 
     public Long getId() {
         return id;
@@ -33,14 +30,6 @@ public class Evento {
         this.nome = nome;
     }
 
-    public Double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(Double preco) {
-        this.preco = preco;
-    }
-
     public String getEndereco() {
         return endereco;
     }
@@ -55,13 +44,5 @@ public class Evento {
 
     public void setLocalDateTime(LocalDateTime localDateTime) {
         this.localDateTime = localDateTime;
-    }
-
-    public CategoriaEvento getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(CategoriaEvento categoria) {
-        this.categoria = categoria;
     }
 }

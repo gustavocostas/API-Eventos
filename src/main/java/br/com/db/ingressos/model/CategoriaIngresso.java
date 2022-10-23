@@ -1,6 +1,6 @@
 package br.com.db.ingressos.model;
 
-public enum CategoriaEvento {
+public enum CategoriaIngresso {
     PISTA,
     VIP,
     CAMAROTE

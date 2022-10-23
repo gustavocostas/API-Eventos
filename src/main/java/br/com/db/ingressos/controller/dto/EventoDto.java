@@ -3,20 +3,16 @@ package br.com.db.ingressos.controller.dto;
 import br.com.db.ingressos.model.Evento;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 public class EventoDto {
     private Long id;
-    @NotBlank
+    @NotBlank(message = "Nome obrigatório!")
     private String nome;
-    @NotNull
-    private Double preco;
     private String endereco;
 
     public EventoDto(Evento evento) {
         this.id = evento.getId();
         this.nome = evento.getNome();
-        this.preco = evento.getPreco();
         this.endereco = evento.getEndereco();
     }
 
@@ -37,14 +33,6 @@ public class EventoDto {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(Double preco) {
-        this.preco = preco;
     }
 
     public String getEndereco() {

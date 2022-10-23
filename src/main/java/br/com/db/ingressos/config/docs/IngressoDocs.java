@@ -1,10 +1,9 @@
 package br.com.db.ingressos.config.docs;
 
-import br.com.db.ingressos.controller.dto.EventoDto;
+import br.com.db.ingressos.controller.dto.IngressoDto;
 import br.com.db.ingressos.exception.EntityBadRequestException;
-import br.com.db.ingressos.exception.EntityNotFoundException;
 import br.com.db.ingressos.exception.EntityNullPointerException;
-import br.com.db.ingressos.model.Evento;
+import br.com.db.ingressos.resposta.IngressoResposta;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -17,17 +16,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.HttpClientErrorException;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
-@Tag(name = "evento", description = "Responsável por manter evento no sistema")
-public interface EventoDocs {
-    @Operation(summary = "Cadastra novo evento.", tags = "evento")
+@Tag(name = "ingresso", description = "Responsável por manter ingresso no sistema")
+public interface IngressoDocs {
+    @Operation(summary = "Cadastra novo ingresso.", tags = "ingresso")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201",
-                    description = "Evento incluído com sucesso",
-                    content = @Content(schema = @Schema(implementation = Evento.class))
+                    description = "Ingresso incluído com sucesso",
+                    content = @Content(schema = @Schema(implementation = IngressoResposta.class))
             ),
             @ApiResponse(responseCode = "400",
                     content = @Content(
@@ -41,13 +40,13 @@ public interface EventoDocs {
             ),
 
     })
-    ResponseEntity<EventoDto> cadastrarEvento(@RequestBody @Valid EventoDto eventoDto);
+    ResponseEntity<IngressoResposta> cadastrarIngresso(@RequestBody @Valid IngressoDto ingressoDto);
 
-    @Operation(summary = "Lista os eventos.", tags = "evento")
+    @Operation(summary = "Lista os ingressos.", tags = "ingresso")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
-                    description = "Eventos listados com sucesso",
-                    content = @Content(schema = @Schema(implementation = Evento.class))
+                    description = "Ingressos listados com sucesso",
+                    content = @Content(schema = @Schema(implementation = IngressoResposta.class))
             ),
             @ApiResponse(responseCode = "404",
                     content = @Content(
@@ -56,13 +55,13 @@ public interface EventoDocs {
             ),
 
     })
-    ResponseEntity<List<EventoDto>> listarEvento();
+    ResponseEntity<List<IngressoResposta>> listarIngresso();
 
-    @Operation(summary = "Encontra o evento.", tags = "evento")
+    @Operation(summary = "Encontra o ingresso.", tags = "ingresso")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
-                    description = "Evento encontrado com sucesso",
-                    content = @Content(schema = @Schema(implementation = Evento.class))
+                    description = "Ingresso encontrado com sucesso",
+                    content = @Content(schema = @Schema(implementation = IngressoResposta.class))
             ),
             @ApiResponse(responseCode = "404",
                     content = @Content(
@@ -71,33 +70,13 @@ public interface EventoDocs {
             ),
 
     })
-    ResponseEntity<Optional<EventoDto>> encontrarEventoPorId(@PathVariable Long id);
+    ResponseEntity<IngressoResposta> encontrarIngressoPorId(@PathVariable Long id);
 
-    @Operation(summary = "Atualiza o evento.", tags = "evento")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",
-                    description = "Evento atualizado com sucesso",
-                    content = @Content(schema = @Schema(implementation = Evento.class))
-            ),
-            @ApiResponse(responseCode = "400",
-                    content = @Content(
-                            mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = EntityBadRequestException.class))
-            ),
-            @ApiResponse(responseCode = "404",
-                    content = @Content(
-                            mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = EntityNotFoundException.class))
-            ),
-
-    })
-    ResponseEntity<EventoDto> atualizarEvento(@RequestBody @Valid EventoDto eventoDto);
-
-    @Operation(summary = "Exclui o evento.", tags = "evento")
+    @Operation(summary = "Exclui o ingresso.", tags = "ingresso")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Ingresso excluído com sucesso",
-                    content = @Content(schema = @Schema(implementation = Evento.class))
+                    content = @Content(schema = @Schema(implementation = IngressoResposta.class))
             ),
             @ApiResponse(responseCode = "404",
                     content = @Content(
@@ -106,6 +85,5 @@ public interface EventoDocs {
             ),
 
     })
-
-    ResponseEntity<Long> deletarEvento(@PathVariable Long id);
+    ResponseEntity<Long> deletarIngresso(@PathVariable Long id);
 }
