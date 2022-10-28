@@ -2,8 +2,7 @@ package br.com.db.ingressos.controller;
 
 import br.com.db.ingressos.config.docs.EventoDocs;
 import br.com.db.ingressos.controller.dto.EventoDto;
-import br.com.db.ingressos.controller.dto.UsuarioDto;
-import br.com.db.ingressos.service.EventoService;
+import br.com.db.ingressos.service.IEventoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,7 @@ import java.util.Optional;
 @RequestMapping("/eventos")
 public class EventoController implements EventoDocs {
     @Autowired
-    EventoService eventoService;
+    IEventoService eventoService;
 
     @PostMapping
     public ResponseEntity<EventoDto> cadastrarEvento(@RequestBody @Valid EventoDto eventoDto) {
@@ -30,7 +29,7 @@ public class EventoController implements EventoDocs {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<EventoDto>> encontrarEvento(@PathVariable Long id) {
+    public ResponseEntity<Optional<EventoDto>> encontrarEventoPorId(@PathVariable Long id) {
         return ResponseEntity.ok(eventoService.encontrarEventoPorId(id));
     }
 

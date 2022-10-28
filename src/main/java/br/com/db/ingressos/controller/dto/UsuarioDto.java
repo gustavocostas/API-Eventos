@@ -3,17 +3,19 @@ package br.com.db.ingressos.controller.dto;
 import br.com.db.ingressos.model.Usuario;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 public class UsuarioDto {
     private Long id;
-    @NotBlank
+    @NotBlank(message = "Nome obrigatório!")
     private String nome;
     private String cpf;
-    @NotBlank
+    @NotBlank(message = "Email obrigatório!")
+    @Email
     private String email;
-    @NotBlank
-    @Length(min = 8)
+    @NotBlank(message = "Senha obrigatória!")
+    @Length(min = 8, message = "Oito caracteres no mínimo!")
     private String senha;
 
     public UsuarioDto(Usuario usuario) {
