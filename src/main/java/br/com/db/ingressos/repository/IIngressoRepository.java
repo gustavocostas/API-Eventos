@@ -7,7 +7,10 @@ import java.util.Optional;
 
 public interface IIngressoRepository {
     Ingresso saveIngresso(Ingresso ingresso);
+
     List<Ingresso> listarIngresso();
+
     Optional<Ingresso> findByIdIngresso(Long id);
+
     void deleteByIdIngresso(Long id);
 }

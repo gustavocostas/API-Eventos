@@ -15,12 +15,13 @@ import java.util.Optional;
 public class IngressoService implements IIngressoService {
     IIngressoRepository ingressoRepository;
 
-    public IngressoService(IIngressoRepository ingressoRepository){
+    public IngressoService(IIngressoRepository ingressoRepository) {
         this.ingressoRepository = ingressoRepository;
     }
 
     public IngressoDto cadastrarIngresso(IngressoDto ingressoDto) {
-        return IngressoMapper.ingressoParaDto(ingressoRepository.saveIngresso(IngressoMapper.dtoParaIngresso(ingressoDto)));
+        return IngressoMapper
+                .ingressoParaDto(ingressoRepository.saveIngresso(IngressoMapper.dtoParaIngresso(ingressoDto)));
     }
 
     public List<IngressoDto> listarIngresso() {
@@ -34,8 +35,7 @@ public class IngressoService implements IIngressoService {
     public void deletarIngresso(Long id) {
         Optional<Ingresso> ingresso = ingressoRepository.findByIdIngresso(id);
         ingresso.orElseThrow(
-                () -> new EntityNotFoundException("Ingresso não encontrado para excluir.")
-        );
+                () -> new EntityNotFoundException("Ingresso não encontrado para excluir."));
         ingressoRepository.deleteByIdIngresso(id);
     }
 }

@@ -40,8 +40,10 @@ public class UsuarioController implements UsuarioDocs {
     }
 
     @PutMapping
-    public ResponseEntity<UsuarioAtualizadoResposta> atualizarUsuario(@RequestBody @Valid UsuarioAtualizadoResposta usuarioDto) {
-        UsuarioAtualizadoResposta atualizado = UsuarioMapper.dtoParaAtualizadoResposta(usuarioService.atualizarUsuario(usuarioDto));
+    public ResponseEntity<UsuarioAtualizadoResposta> atualizarUsuario(
+            @RequestBody @Valid UsuarioAtualizadoResposta usuarioDto) {
+        UsuarioAtualizadoResposta atualizado = UsuarioMapper
+                .dtoParaAtualizadoResposta(usuarioService.atualizarUsuario(usuarioDto));
         return ResponseEntity.ok(atualizado);
     }
 

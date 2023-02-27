@@ -16,7 +16,7 @@ import java.util.Optional;
 public class UsuarioService implements IUsuarioService {
     IUsuarioRepository usuarioRepository;
 
-    public UsuarioService(IUsuarioRepository usuarioRepository){
+    public UsuarioService(IUsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
 
@@ -43,8 +43,7 @@ public class UsuarioService implements IUsuarioService {
     public void deletarUsuario(Long id) {
         Optional<Usuario> usuario = usuarioRepository.findByIdUsuario(id);
         usuario.orElseThrow(
-                () -> new EntityNotFoundException("Usuário não encontrado para excluir.")
-        );
+                () -> new EntityNotFoundException("Usuário não encontrado para excluir."));
         usuarioRepository.deleteByIdUsuario(id);
     }
 }

@@ -39,5 +39,3 @@ public class IngressoRepository implements IIngressoRepository {
     private interface RepositorySpringData extends JpaRepository<Ingresso, Long> {
     }
 }
-
-

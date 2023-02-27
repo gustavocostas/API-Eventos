@@ -10,7 +10,7 @@ public class SwaggerConfig {
     private String apiVersion = "v1";
 
     @Bean
-    public OpenAPI openApiSpec(){
+    public OpenAPI openApiSpec() {
         return new OpenAPI().info(
                 new Info()
                         .title("Eventos API")

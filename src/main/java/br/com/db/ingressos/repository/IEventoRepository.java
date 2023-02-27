@@ -7,7 +7,10 @@ import java.util.Optional;
 
 public interface IEventoRepository {
     Evento saveEvento(Evento evento);
+
     List<Evento> listarEvento();
+
     Optional<Evento> findByIdEvento(Long id);
+
     void deleteByIdEvento(Long id);
 }

@@ -42,8 +42,7 @@ public class EventoService implements IEventoService {
     public void deletarEvento(Long id) {
         Optional<Evento> evento = eventoRepository.findByIdEvento(id);
         evento.orElseThrow(
-                () -> new EntityNotFoundException("Evento não encontrado para excluir.")
-        );
+                () -> new EntityNotFoundException("Evento não encontrado para excluir."));
         eventoRepository.deleteByIdEvento(id);
     }
 }

@@ -7,7 +7,10 @@ import java.util.Optional;
 
 public interface IUsuarioRepository {
     Usuario saveUsuario(Usuario usuario);
+
     List<Usuario> listarUsuario();
+
     Optional<Usuario> findByIdUsuario(Long id);
+
     void deleteByIdUsuario(Long id);
 }
